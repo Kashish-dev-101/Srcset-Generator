@@ -119,6 +119,6 @@ This tool uses the ImageKit JavaScript SDK for responsive image generation.
 
 Relevant documentation:
 
-ImageKit JS SDK: https://imagekit.io/docs/integration/javascript#responsive-images
-Responsive Image Gudide: https://imagekit.io/responsive-images/
+- ImageKit JS SDK (Responsive Images): https://imagekit.io/docs/integration/javascript#responsive-images
+- Responsive Images Guide: https://imagekit.io/responsive-images/
 
