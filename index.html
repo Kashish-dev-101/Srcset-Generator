@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
@@ -13,7 +13,7 @@
       <div class="brand">
         <span class="logoDot">i</span>
         <span class="brandText"
-          >Responsive Image Breakpoints Generator <span class="dim"></span
+          >Responsive Image Breakpoint Generator <span class="dim"></span
         ></span>
       </div>
     </header>
@@ -312,7 +312,7 @@
         }
 
         [modeWidth, modeSizes, modeFull].forEach(
-          (r) => r && r.addEventListener("change", onChange)
+          (r) => r && r.addEventListener("change", onChange),
         );
 
         onChange(); // initial state - all hidden
