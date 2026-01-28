@@ -107,11 +107,3 @@ For local development, any static server can be used.
 Example:
 VS Code Live Server extension
 
----
-
-## Configuration
-
-Update the ImageKit URL endpoint in the JavaScript file:
-
-```js
-const URL_ENDPOINT = "https://ik.imagekit.io/YOUR_IMAGEKIT_ID/";
