@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SRCSET Generator · ImageKit JS SDK</title>
+    <script src="https://unpkg.com/@imagekit/javascript@5.1.0/dist/imagekit.min.js"></script>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- App header -->
+    <header class="topbar" id="topbar">
+      <div class="brand">
+        <span class="logoDot">i</span>
+        <span class="brandText"
+          >Responsive Image Breakpoints Generator <span class="dim"></span
+        ></span>
+      </div>
+    </header>
+
+    <main class="wrap" id="appRoot">
+      <!-- Source -->
+      <section class="card bar" id="sourceBar">
+        <div class="barTitle">Source</div>
+        <label class="srOnly" for="imgUrl">Image URL or path</label>
+        <input
+          id="imgUrl"
+          class="input"
+          type="text"
+          placeholder="https://ik.imagekit.io/your_account/path/to/image.jpg or sample.jpg"
+        />
+        <small class="help inline">
+          Use a full URL or a path that works with your ImageKit urlEndpoint.
+        </small>
+      </section>
+
+      <!-- Config -->
+      <section class="grid two" id="configRow">
+        <!-- Mode -->
+        <div class="card" id="modeCard">
+          <h2 class="h">Mode</h2>
+          <p class="help">
+            Pick how the image size is determined. Click an option to reveal the
+            relevant input and details.
+          </p>
+
+          <div
+            class="radioGroup"
+            id="modeOptions"
+            role="radiogroup"
+            aria-label="Image sizing mode"
+          >
+            <label class="radioOption" for="modeWidth">
+              <input type="radio" name="mode" id="modeWidth" value="width" />
+              <span class="radioLabel">Single width</span>
+              <small class="radioHelp"
+                >For fixed-size images like avatars, product thumbnails, or
+                logos where the display size never changes.</small
+              >
+            </label>
+
+            <label class="radioOption" for="modeSizes">
+              <input type="radio" name="mode" id="modeSizes" value="sizes" />
+              <span class="radioLabel">Sizes attribute</span>
+              <small class="radioHelp"
+                >For responsive layouts where image width changes based on
+                viewport size (e.g., 3-column grid on desktop, full-width on
+                mobile).</small
+              >
+            </label>
+
+            <label class="radioOption" for="modeFull">
+              <input type="radio" name="mode" id="modeFull" value="full" />
+              <span class="radioLabel">Full width 100vw</span>
+              <small class="radioHelp"
+                >For full-width hero banners, cover images, or edge-to-edge
+                sections that always span the entire viewport.</small
+              >
+            </label>
+          </div>
+
+          <!-- Single width input - hidden by default -->
+          <div class="row" id="widthRow" style="display: none">
+            <label for="widthInput">Target width in CSS pixels</label>
+            <input
+              id="widthInput"
+              class="input"
+              type="number"
+              min="1"
+              placeholder="e.g., 400"
+            />
+            <div class="help">
+              Enter the fixed display width. The generator will round to the
+              nearest breakpoint and create 1x and 2x variants for standard and
+              high-DPI screens.
+            </div>
+          </div>
+
+          <!-- Sizes attribute input - hidden by default -->
+          <div class="row" id="sizesRow" style="display: none">
+            <label for="sizesInput">Sizes attribute</label>
+            <textarea
+              id="sizesInput"
+              class="input textarea"
+              placeholder="e.g., (min-width: 800px) 33vw, 100vw"
+            ></textarea>
+            <div class="help">
+              Specify how the image width changes across viewports. The
+              generator extracts the smallest <code>vw</code> value and builds
+              the <code>srcset</code> with width descriptors.
+            </div>
+          </div>
+
+          <!-- Full width tip - hidden by default -->
+          <div class="row" id="fullRow" style="display: none">
+            <div
+              class="callout info"
+              role="note"
+              aria-label="Tip 100vw"
+              id="tip100vw"
+            >
+              <div class="calloutIcon" aria-hidden="true">
+                <svg
+                  viewBox="0 0 24 24"
+                  width="18"
+                  height="18"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <line x1="12" y1="16" x2="12" y2="12"></line>
+                  <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                </svg>
+              </div>
+              <div class="calloutBody">
+                <div class="calloutTitle">Tip — 100vw</div>
+                <div class="calloutText">
+                  100vw means the image spans the full viewport width. The
+                  browser automatically selects the appropriate resolution based
+                  on the device's pixel density.<br /><br />
+                  <strong>Perfect for:</strong> hero sections, full-bleed
+                  backgrounds, cover images, and banner graphics.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Breakpoints -->
+        <div class="card" id="breakpointsCard">
+          <h2 class="h">Breakpoints</h2>
+          <p class="help">
+            Tune or keep defaults. Both lists are merged and sorted before
+            srcset is built.
+          </p>
+
+          <div class="row">
+            <label for="deviceBreakpoints">Device breakpoints</label>
+            <input
+              id="deviceBreakpoints"
+              class="input"
+              type="text"
+              placeholder="640, 750, 828, 1080, 1200, 1920, 2048, 3840"
+            />
+            <div class="help">Common screen widths for responsive images.</div>
+            <div class="chips" aria-hidden="true" id="deviceChips">
+              <span class="chip">640</span><span class="chip">750</span
+              ><span class="chip">828</span> <span class="chip">1080</span
+              ><span class="chip">1200</span><span class="chip">1920</span>
+              <span class="chip">2048</span><span class="chip">3840</span>
+            </div>
+          </div>
+
+          <div class="row">
+            <label for="imageBreakpoints">Image breakpoints</label>
+            <input
+              id="imageBreakpoints"
+              class="input"
+              type="text"
+              placeholder="16, 32, 48, 64, 96, 128, 256, 384"
+            />
+            <div class="help">
+              Useful for small assets like avatars and icons. Merged with device
+              breakpoints.
+            </div>
+            <div class="chips" aria-hidden="true" id="imageChips">
+              <span class="chip">16</span><span class="chip">32</span
+              ><span class="chip">48</span> <span class="chip">64</span
+              ><span class="chip">96</span><span class="chip">128</span>
+              <span class="chip">256</span><span class="chip">384</span>
+            </div>
+          </div>
+
+          <!-- defaults note -->
+          <div class="callout neutral" id="defaultBreakpointsNote">
+            <div class="calloutIcon" aria-hidden="true">
+              <svg
+                viewBox="0 0 24 24"
+                width="18"
+                height="18"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <circle cx="12" cy="12" r="10"></circle>
+                <polyline points="8 12 11 15 16 10"></polyline>
+              </svg>
+            </div>
+            <div class="calloutBody">
+              <div class="calloutTitle">Defaults in use if left empty</div>
+              <div class="calloutText">
+                <strong>DeviceBP:</strong> 480, 750, 1080, 1440, 1920, 3840
+                <br />
+                <strong>ImageBP:</strong> 32, 64, 96, 128, 256, 384
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Generate -->
+      <section class="card" id="generateCard">
+        <h2 class="h">Generate markup</h2>
+        <p class="help">
+          Generate responsive image markup using ImageKit. Enter your image URL,
+          choose a mode, configure breakpoints if needed, and click Generate to
+          preview the resulting img tag with optimized src and srcset attributes
+        </p>
+        <div class="row actions" id="actionsRow">
+          <button id="generateBtn" class="btn" type="button">Generate</button>
+          <button id="clearBtn" class="btn btnGhost" type="button">
+            Clear
+          </button>
+          <button id="copyBtn" class="btn btnGhost" type="button" disabled>
+            Copy
+          </button>
+        </div>
+
+        <div class="row" id="resultRow">
+          <div class="rowHeader">
+            <label for="resultBlock">Markup preview</label>
+          </div>
+
+          <pre
+            id="resultBlock"
+            class="result"
+            aria-live="polite"
+            aria-atomic="true"
+          >
+<code><!-- Generated img markup will appear here --></code></pre>
+        </div>
+
+        <!-- Image Preview Section -->
+        <div class="row" id="previewRow">
+          <label for="imagePreview">Image preview</label>
+          <div id="imagePreview" class="imagePreviewContainer">
+            <div class="previewPlaceholder">
+              <svg
+                viewBox="0 0 24 24"
+                width="48"
+                height="48"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                <polyline points="21 15 16 10 5 21"></polyline>
+              </svg>
+              <p class="previewText">Generated image will appear here</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- JS to show/hide inputs based on radio selection -->
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const widthRow = document.getElementById("widthRow");
+        const sizesRow = document.getElementById("sizesRow");
+        const fullRow = document.getElementById("fullRow");
+
+        const modeWidth = document.getElementById("modeWidth");
+        const modeSizes = document.getElementById("modeSizes");
+        const modeFull = document.getElementById("modeFull");
+
+        function showOnly(which) {
+          // Hide all by default
+          if (widthRow) widthRow.style.display = "none";
+          if (sizesRow) sizesRow.style.display = "none";
+          if (fullRow) fullRow.style.display = "none";
+
+          // Show the selected one
+          if (which === "width" && widthRow) widthRow.style.display = "grid";
+          if (which === "sizes" && sizesRow) sizesRow.style.display = "grid";
+          if (which === "full" && fullRow) fullRow.style.display = "grid";
+        }
+
+        function onChange() {
+          if (modeWidth && modeWidth.checked) return showOnly("width");
+          if (modeSizes && modeSizes.checked) return showOnly("sizes");
+          if (modeFull && modeFull.checked) return showOnly("full");
+          showOnly(null); // none selected, all hidden
+        }
+
+        [modeWidth, modeSizes, modeFull].forEach(
+          (r) => r && r.addEventListener("change", onChange)
+        );
+
+        onChange(); // initial state - all hidden
+      });
+    </script>
+    <script src="script.js"></script>
+
+    <!-- Footer -->
+    <footer
+      style="
+        text-align: center;
+        padding: 2rem 1rem;
+        color: #666;
+        font-size: 0.9rem;
+      "
+    >
+      Developed with ❤️ by Ashish — powered by
+      <a
+        href="https://imagekit.io/docs/integration/javascript"
+        target="_blank"
+        rel="noopener noreferrer"
+        style="color: #4a90e2; text-decoration: none"
+        >ImageKit JS SDK</a
+      >
+    </footer>
+  </body>
+</html>
