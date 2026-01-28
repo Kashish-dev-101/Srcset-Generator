@@ -6,6 +6,13 @@ This tool helps developers quickly create correct responsive image markup withou
 
 ---
 
+## Live demo
+
+Try the tool here:  
+https://kashish-dev-101.github.io/Srcset-Generator/
+
+---
+
 ## Why this tool exists
 
 Creating responsive images correctly is error prone and repetitive.  
@@ -17,7 +24,7 @@ It is especially useful for frontend developers who want to understand and apply
 
 ## Features
 
-1. Generate responsive img markup using ImageKit JS SDK
+1. Generate responsive img markup using the ImageKit JS SDK
 2. Supports multiple generation modes
    1. Single width mode
    2. Sizes attribute mode
@@ -73,14 +80,14 @@ This tool exposes two independent breakpoint configurations.
 
 These represent viewport widths at which the image layout may change.
 
-Default values:
+Default values:  
 480, 750, 1080, 1440, 1920, 3840
 
 ### Image breakpoints
 
 These represent actual image widths that ImageKit can generate.
 
-Default values:
+Default values:  
 32, 64, 96, 128, 256, 384
 
 ### Fallback behavior
@@ -102,8 +109,16 @@ If the user leaves breakpoint inputs empty or provides invalid values, the tool 
 1. Clone the repository
 2. Open index.html in a browser
 
-For local development, any static server can be used.
+For local development, any static server can be used, for example the VS Code Live Server extension.
 
-Example:
-VS Code Live Server extension
+---
+
+## ImageKit reference
+
+This tool uses the ImageKit JavaScript SDK for responsive image generation.
+
+Relevant documentation:
+
+ImageKit JS SDK: https://imagekit.io/docs/integration/javascript#responsive-images
+Responsive Image Gudide: https://imagekit.io/responsive-images/
 
