@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>SRCSET Generator · ImageKit JS SDK</title>
+    <title>SRCSET Generator-ImageKit JS SDK</title>
     <script src="https://unpkg.com/@imagekit/javascript@5.1.0/dist/imagekit.min.js"></script>
     <link rel="stylesheet" href="style.css" />
   </head>
@@ -27,10 +27,10 @@
           id="imgUrl"
           class="input"
           type="text"
-          placeholder="https://ik.imagekit.io/your_account/path/to/image.jpg or sample.jpg"
+          placeholder="https://ik.imagekit.io/your_account/path/to/image.jpg"
         />
         <small class="help inline">
-          Use a full URL or a path that works with your ImageKit urlEndpoint.
+          Enter the full ImageKit delivered image URL
         </small>
       </section>
 
@@ -42,6 +42,17 @@
           <p class="help">
             Pick how the image size is determined. Click an option to reveal the
             relevant input and details.
+            <span class="help-emphasis">
+              Read more on how the sizes attribute works with responsive images
+              <a
+                href="https://imagekit.io/responsive-images/#chapter-5---srcset-with-sizes"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="help-link"
+              >
+                here
+              </a>
+            </span>
           </p>
 
           <div
@@ -214,9 +225,10 @@
             <div class="calloutBody">
               <div class="calloutTitle">Defaults in use if left empty</div>
               <div class="calloutText">
-                <strong>DeviceBP:</strong> 480, 750, 1080, 1440, 1920, 3840
+                <strong>DeviceBP:</strong> 640, 750, 828, 1080, 1200, 1920,
+                2048, 3840
                 <br />
-                <strong>ImageBP:</strong> 32, 64, 96, 128, 256, 384
+                <strong>ImageBP:</strong> 16, 32, 48, 64, 96, 128, 256, 384
               </div>
             </div>
           </div>
@@ -253,7 +265,7 @@
             aria-atomic="true"
           >
 <code><!-- Generated img markup will appear here --></code></pre>
-        </div>
+    
 
         <!-- Image Preview Section -->
         <div class="row" id="previewRow">
@@ -316,6 +328,18 @@
         );
 
         onChange(); // initial state - all hidden
+        const preview = document.getElementById("imagePreview");
+        const slider = document.getElementById("previewWidth");
+        const val = document.getElementById("previewWidthVal");
+
+        if (preview && slider && val) {
+          const apply = () => {
+            val.textContent = slider.value;
+            preview.style.width = slider.value + "vw";
+          };
+          slider.addEventListener("input", apply);
+          apply();
+        }
       });
     </script>
     <script src="script.js"></script>
