@@ -36,9 +36,9 @@ const copyBtn = document.querySelector("#copyBtn");
 // console.log(copyBtn);
 
 // Small constants so you do not repeat arrays everywhere
-const URL_ENDPOINT = "https://ik.imagekit.io/Kashish12345/";
-const DEFAULT_DEVICE_BPS = [480, 750, 1080, 1440, 1920, 3840];
-const DEFAULT_IMAGE_BPS = [32, 64, 96, 128, 256, 384];
+
+const DEFAULT_DEVICE_BPS = [640, 750, 828, 1080, 1200, 1920, 2048, 3840];
+const DEFAULT_IMAGE_BPS = [16, 32, 48, 64, 96, 128, 256, 384];
 
 // local storage for storing data
 function saveFormData() {
@@ -120,7 +120,6 @@ function buildParamsFromForm() {
 
   const params = {
     src: imgURL,
-    urlEndpoint: URL_ENDPOINT,
   };
 
   if (mode === "width") {
