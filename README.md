@@ -35,9 +35,10 @@ It is especially useful for frontend developers who want to understand and apply
    2. Image breakpoints for generated image sizes
 4. Live image preview
 5. Copy generated markup to clipboard
-6. Persistent state using localStorage
-   1. Restores form values on reload
-   2. Restores last generated markup
+6. Session based state using sessionStorage
+   1. Opens empty on a fresh visit
+   2. Restores form values and last generated markup on page refresh
+   3. Clears automatically when the tab is closed
 
 ---
 

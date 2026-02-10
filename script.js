@@ -40,7 +40,7 @@ const copyBtn = document.querySelector("#copyBtn");
 const DEFAULT_DEVICE_BPS = [640, 750, 828, 1080, 1200, 1920, 2048, 3840];
 const DEFAULT_IMAGE_BPS = [16, 32, 48, 64, 96, 128, 256, 384];
 
-// local storage for storing data
+// Session storage: persists across refreshes but clears when the tab is closed
 function saveFormData() {
   const formData = {
     imgUrl: imageInput.value,
@@ -50,12 +50,12 @@ function saveFormData() {
     deviceBreakpoints: deviceBreakpoints.value,
     imageBreakpoints: imageBreakpoints.value,
   };
-  localStorage.setItem("srcsetGeneratorData", JSON.stringify(formData)); // Local storage can only store strings so we stringify the object
+  sessionStorage.setItem("srcsetGeneratorData", JSON.stringify(formData)); // Session storage can only store strings so we stringify the object
 }
 
-// function to restore form data on page load from local storage
+// function to restore form data on page load from session storage
 function restoreFormData() {
-  const saved = localStorage.getItem("srcsetGeneratorData");
+  const saved = sessionStorage.getItem("srcsetGeneratorData");
   if (!saved) return;
 
   try {
@@ -83,7 +83,7 @@ function restoreFormData() {
     if (formData.imageBreakpoints)
       imageBreakpoints.value = formData.imageBreakpoints;
 
-    // console.log("✅ Form data restored from localStorage");
+    // console.log("✅ Form data restored from sessionStorage");
   } catch (error) {
     // console.error("Error restoring form data:", error);
   }
@@ -175,7 +175,7 @@ function renderFromParams(params, mode, { saveMarkup = false } = {}) {
   if (copyBtn) copyBtn.disabled = false;
 
   if (saveMarkup) {
-    localStorage.setItem("srcsetGeneratorMarkup", markup);
+    sessionStorage.setItem("srcsetGeneratorMarkup", markup);
   }
 
   const imagePreview = document.querySelector("#imagePreview");
@@ -217,7 +217,7 @@ function regeneratePreviewFromInputs() {
 document.addEventListener("DOMContentLoaded", () => {
   restoreFormData();
 
-  const lastMarkup = localStorage.getItem("srcsetGeneratorMarkup");
+  const lastMarkup = sessionStorage.getItem("srcsetGeneratorMarkup");
   if (lastMarkup) resultBlock.textContent = lastMarkup;
 
   regeneratePreviewFromInputs();
@@ -289,8 +289,8 @@ if (clearBtn) {
       imagePreview.classList.remove("loading", "error");
     }
 
-    localStorage.removeItem("srcsetGeneratorData");
-    localStorage.removeItem("srcsetGeneratorMarkup");
+    sessionStorage.removeItem("srcsetGeneratorData");
+    sessionStorage.removeItem("srcsetGeneratorMarkup");
 
     // console.log("All fields cleared and form reset");
     imageInput.focus();
