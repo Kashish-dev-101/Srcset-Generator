@@ -10,7 +10,7 @@ This tool helps developers quickly create correct responsive image markup withou
 
 Try the tool here: [Live Demo](https://kashish-dev-101.github.io/Srcset-Generator/)
 
-![Srcset Generator Screenshot](./screenshot.png)
+![Srcset Generator Preview](./preview.png)
 
 ---
 
