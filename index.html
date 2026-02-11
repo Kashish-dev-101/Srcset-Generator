@@ -3,20 +3,32 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>SRCSET Generator-ImageKit JS SDK</title>
+    <title>Srcset Generator — ImageKit</title>
     <script src="https://unpkg.com/@imagekit/javascript@5.1.0/dist/imagekit.min.js"></script>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <!-- App header -->
-    <header class="topbar" id="topbar">
+    <!-- Navbar -->
+    <nav class="topbar" id="topbar">
       <div class="brand">
         <span class="logoDot">i</span>
-        <span class="brandText"
-          >Responsive Image Breakpoint Generator <span class="dim"></span
-        ></span>
+        Responsive Image Breakpoint Generator
       </div>
-    </header>
+      <div class="nav-links">
+        <a
+          href="https://imagekit.io/docs/integration/javascript#responsive-images"
+          target="_blank"
+          rel="noopener noreferrer"
+          >Docs</a
+        >
+        <a
+          href="https://imagekit.io/responsive-images/"
+          target="_blank"
+          rel="noopener noreferrer"
+          >Guide</a
+        >
+      </div>
+    </nav>
 
     <main class="wrap" id="appRoot">
       <!-- Source -->
@@ -344,23 +356,16 @@
     </script>
     <script src="script.js"></script>
 
-    <!-- Footer -->
-    <footer
-      style="
-        text-align: center;
-        padding: 2rem 1rem;
-        color: #666;
-        font-size: 0.9rem;
-      "
-    >
-      Powered by
-      <a
-        href="https://imagekit.io/docs/integration/javascript"
-        target="_blank"
-        rel="noopener noreferrer"
-        style="color: #4a90e2; text-decoration: none; font-weight: 700"
-        >ImageKit JS SDK</a
-      >
+    <footer class="site-footer">
+      <p>
+        Powered by
+        <a
+          href="https://imagekit.io/docs/integration/javascript"
+          target="_blank"
+          rel="noopener noreferrer"
+          >ImageKit JS SDK</a
+        >
+      </p>
     </footer>
   </body>
 </html>

@@ -1,19 +1,16 @@
 :root {
-  /* ImageKit like light theme: white surfaces with blue accents */
-  --bg: #f7f9fc;
+  /* ImageKit branding — matches MediaLab palette */
+  --bg: #f0f4fa;
   --panel: #ffffff;
-  --text: #0b1a33;
-  --muted: #6c7b94;
+  --text: #1b2a4a;
+  --muted: #64748b;
 
   --accent: #2563eb; /* primary blue */
-  --accentSoft: #e8f0ff;
-  --accentBorder: #b9cdfc;
+  --accentSoft: #eef2ff;
+  --accentBorder: #c7d2fe;
 
-  --success: #20c997; /* keep a touch of green for action */
-  --successDark: #12a37b;
-
-  --border: #e5e9f2;
-  --shadow: 0 8px 28px rgba(16, 24, 40, 0.08);
+  --border: #e5e7eb;
+  --shadow: 0 2px 12px rgba(37, 99, 235, 0.06);
 
   --chip: #eef2ff;
   --chipText: #334155;
@@ -53,24 +50,26 @@ body {
   color: var(--text);
 }
 
-/* Top bar */
+/* Top bar — matches MediaLab navbar */
 .topbar {
   position: sticky;
   top: 0;
-  z-index: 10;
+  z-index: 100;
   display: flex;
   align-items: center;
-  height: 56px;
-  padding: 0 20px;
-  background: #0f1a33;
+  justify-content: space-between;
+  height: 60px;
+  padding: 0 40px;
+  background: #1b2a4a;
   color: #fff;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
 }
 .brand {
   display: flex;
   align-items: center;
   gap: 10px;
   font-weight: 700;
+  font-size: 16px;
+  letter-spacing: -0.3px;
 }
 .logoDot {
   width: 28px;
@@ -81,12 +80,31 @@ body {
   color: #fff;
   border-radius: 7px;
   font-weight: 800;
+  font-size: 15px;
+  flex-shrink: 0;
 }
-.brandText {
-  letter-spacing: 0.2px;
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 4px;
 }
-.brandText .dim {
-  opacity: 0.85;
+.nav-links a {
+  padding: 7px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #94a3b8;
+  background: transparent;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+.nav-links a:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.1);
+}
+.nav-links a.active {
+  color: #fff;
+  background: #2563eb;
 }
 
 /* Layout */
@@ -134,7 +152,7 @@ body {
 .barTitle {
   font-weight: 700;
   font-size: 14px;
-  color: #0f1a33;
+  color: #1b2a4a;
   padding: 6px 10px;
   border-radius: 9px;
   background: var(--accentSoft);
@@ -255,7 +273,7 @@ body {
   border: 1px solid #dfe7ff;
 }
 
-/* Buttons */
+/* Buttons — ImageKit blue */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -263,22 +281,20 @@ body {
   padding: 12px 16px;
   border-radius: 10px;
   border: 1px solid transparent;
-  background: linear-gradient(180deg, var(--success), var(--successDark));
+  background: #2563eb;
   color: #fff;
   font-weight: 600;
   cursor: pointer;
-  transition:
-    filter 0.2s ease,
-    transform 0.15s ease;
+  transition: background-color 0.2s, transform 0.15s;
 }
 .btn:hover {
-  filter: brightness(1.05);
+  background: #1d4ed8;
   transform: translateY(-1px);
 }
 .btnGhost {
   background: #fff;
   border-color: var(--border);
-  color: #0f1a33;
+  color: #1b2a4a;
 }
 .actions {
   grid-auto-flow: column;
@@ -453,8 +469,7 @@ body {
 }
 
 #generateCard #previewRow {
-  width: 100vw;
-  margin-left: calc(50% - 50vw);
+  width: 100%;
 }
 
 #generateCard #imagePreview {
@@ -464,7 +479,6 @@ body {
 #generateCard .imagePreviewContainer img {
   width: 100%;
   height: auto;
-  max-height: none;
   object-fit: contain;
   display: block;
 }
@@ -482,4 +496,45 @@ body {
   font-weight: 600;
   font-size: 18px;
   color: var(--text);
+}
+
+/* Footer — matches MediaLab */
+.site-footer {
+  text-align: center;
+  padding: 20px 24px;
+  background: #fff;
+  color: #64748b;
+  border-top: 1px solid #e5e7eb;
+  font-size: 13px;
+  margin-top: 40px;
+}
+.site-footer strong {
+  color: #1b2a4a;
+}
+.site-footer a {
+  color: #2563eb;
+  text-decoration: none;
+  font-weight: 500;
+}
+.site-footer a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive navbar */
+@media (max-width: 768px) {
+  .topbar {
+    flex-direction: column;
+    height: auto;
+    padding: 14px 20px;
+    gap: 10px;
+  }
+  .nav-links {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 4px;
+  }
+  .nav-links a {
+    font-size: 12px;
+    padding: 6px 10px;
+  }
 }
