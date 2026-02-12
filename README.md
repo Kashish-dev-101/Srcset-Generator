@@ -47,7 +47,7 @@ It is especially useful for frontend developers who want to understand and apply
 1. User provides an ImageKit Image URL
 2. A responsive mode is selected
 3. Breakpoints are read from user input or defaults
-4. ImageKit generates responsive image attributes
+4. ImageKit's JS SDK Helper function generates responsive image attributes
 5. The tool renders
    1. The final img markup
    2. A live preview using the generated src and srcset
